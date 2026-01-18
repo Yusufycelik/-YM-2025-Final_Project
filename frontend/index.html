@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EtkinlikMerkezi - Etkinlik Bilet Satış Platformu</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Styling */
+        .navbar-custom {
+            background-color: #1a1a1a !important;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand-custom {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        .navbar-brand-custom i {
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        .navbar-nav-custom .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-left: 1rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .navbar-nav-custom .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 2px solid #667eea;
+            color: #667eea !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #667eea;
+            color: #fff !important;
+        }
+
+        .btn-register {
+            background-color: #667eea;
+            border: 2px solid #667eea;
+            color: #fff !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .btn-register:hover {
+            background-color: #5568d3;
+            border-color: #5568d3;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-hero {
+            background-color: #667eea;
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-hero:hover {
+            background-color: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+
+        /* Event Cards */
+        .event-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            background: white;
+            height: 100%;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .event-card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .event-card-body {
+            padding: 1.5rem;
+        }
+
+        .event-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .event-card-info {
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .event-card-info i {
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        .event-card-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+
+        .btn-buy-ticket {
+            width: 100%;
+            background-color: #667eea;
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-buy-ticket:hover {
+            background-color: #5568d3;
+            transform: scale(1.02);
+        }
+
+        .btn-buy-ticket:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.5rem;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-modal {
+            width: 100%;
+            background-color: #667eea;
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .btn-modal:hover {
+            background-color: #5568d3;
+        }
+
+        /* Messages */
+        .alert {
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* User Menu Dropdown */
+        .dropdown-menu {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-item {
+            font-family: 'Poppins', sans-serif;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Admin Controls */
+        .admin-section {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .admin-section h3 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        /* Tickets & Profile Sections */
+        .section-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section {
+                height: 400px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand-custom" href="#">
+                <i class="fas fa-ticket-alt"></i> EtkinlikMerkezi
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto navbar-nav-custom align-items-center">
+                    <li class="nav-item" id="user-menu-item" style="display: none;">
+                        <div class="dropdown">
+                            <button class="btn btn-link text-white text-decoration-none dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> <span id="navbar-username"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" onclick="showProfileModal(); return false;"><i class="fas fa-user me-2"></i>Profil</a></li>
+                                <li id="tickets-menu-item"><a class="dropdown-item" href="#" onclick="showTicketsModal(); return false;"><i class="fas fa-ticket-alt me-2"></i>Biletlerim</a></li>
+                                <li id="admin-panel-menu-item" style="display: none;"><a class="dropdown-item" href="#" onclick="showUsersManagementModal(); return false;"><i class="fas fa-users-cog me-2"></i>Kullanıcı Yönetimi</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#" onclick="logout(); return false;"><i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item" id="login-btn-item">
+                        <a class="nav-link btn-login" href="#" onclick="openLoginModal(); return false;">
+                            <i class="fas fa-sign-in-alt me-2"></i>Giriş Yap
+                        </a>
+                    </li>
+                    <li class="nav-item" id="register-btn-item">
+                        <a class="nav-link btn-register" href="#" onclick="openRegisterModal(); return false;">
+                            <i class="fas fa-user-plus me-2"></i>Kayıt Ol
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section" style="margin-top: 76px;">
+        <div class="hero-content">
+            <h1>Hayatın Ritmini Yakala</h1>
+            <p>En iyi etkinlikleri keşfet, unutulmaz anlar yaşa</p>
+            <button class="btn btn-hero" onclick="scrollToEvents()">
+                <i class="fas fa-search me-2"></i>Etkinlikleri Keşfet
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Admin Controls (Hidden by default) -->
+        <div id="event-admin-controls" class="admin-section hidden">
+            <h3><i class="fas fa-plus-circle me-2"></i>Yeni Etkinlik Oluştur</h3>
+            <div id="event-admin-message"></div>
+            <form id="create-event-form">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Başlık</label>
+                        <input type="text" class="form-control" id="event-title" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select class="form-select" id="event-category" required>
+                            <option value="concert">Konser</option>
+                            <option value="theater">Tiyatro</option>
+                            <option value="sports">Spor</option>
+                            <option value="conference">Konferans</option>
+                            <option value="workshop">Atölye</option>
+                            <option value="festival">Festival</option>
+                            <option value="other">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Salon/Mekan</label>
+                        <input type="text" class="form-control" id="event-venue" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Şehir</label>
+                        <input type="text" class="form-control" id="event-city" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Adres</label>
+                        <input type="text" class="form-control" id="event-address">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Başlangıç Tarihi</label>
+                        <input type="datetime-local" class="form-control" id="event-start-date" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Bitiş Tarihi</label>
+                        <input type="datetime-local" class="form-control" id="event-end-date" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Bilet Fiyatı (TRY)</label>
+                        <input type="number" class="form-control" id="event-base-price" min="0" step="0.01" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Kapasite</label>
+                        <input type="number" class="form-control" id="event-capacity" min="1" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Açıklama</label>
+                        <textarea class="form-control" id="event-description" rows="3" placeholder="Etkinlik hakkında kısa bilgi"></textarea>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Görsel URL</label>
+                        <input type="url" class="form-control" id="event-image-url" placeholder="https://...">
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-modal">
+                            <i class="fas fa-check me-2"></i>Etkinlik Oluştur
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Events Section -->
+        <h2 class="section-title" id="events-section">Popüler Etkinlikler</h2>
+        <div id="events-message"></div>
+        <div class="row" id="events-list">
+            <!-- Events will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-sign-in-alt me-2"></i>Giriş Yap</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="login-message"></div>
+                    <form onsubmit="login(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Kullanıcı Adı</label>
+                            <input type="text" class="form-control" id="login-username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şifre</label>
+                            <input type="password" class="form-control" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-modal">
+                            <i class="fas fa-sign-in-alt me-2"></i>Giriş Yap
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Kayıt Ol</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="register-message"></div>
+                    <form onsubmit="register(event)">
+                        <div class="mb-3">
+                            <label class="form-label">E-posta</label>
+                            <input type="email" class="form-control" id="register-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kullanıcı Adı</label>
+                            <input type="text" class="form-control" id="register-username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ad Soyad</label>
+                            <input type="text" class="form-control" id="register-fullname">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şifre</label>
+                            <input type="password" class="form-control" id="register-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-modal">
+                            <i class="fas fa-user-plus me-2"></i>Kayıt Ol
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user me-2"></i>Profil Bilgileri</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="profile-message"></div>
+                    <div id="profile-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-credit-card me-2"></i>Ödeme Bilgileri</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="payment-message"></div>
+                    <form id="payment-form">
+                        <div class="mb-3">
+                            <label class="form-label">Kart Numarası</label>
+                            <input type="text" class="form-control" id="card-number" 
+                                   placeholder="1234 5678 9012 3456" 
+                                   maxlength="19" 
+                                   pattern="[0-9\s]{13,19}"
+                                   required>
+                            <small class="form-text text-muted">
+                                Test için: Son 4 hane 0000 = Reddedildi, 1111 = Yetersiz Bakiye, Diğer = Başarılı
+                            </small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Son Kullanma Tarihi</label>
+                                <input type="text" class="form-control" id="card-expiry" 
+                                       placeholder="MM/YY" 
+                                       maxlength="5"
+                                       pattern="[0-9]{2}/[0-9]{2}"
+                                       required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="card-cvv" 
+                                       placeholder="123" 
+                                       maxlength="4"
+                                       pattern="[0-9]{3,4}"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kart Sahibi Adı</label>
+                            <input type="text" class="form-control" id="card-holder-name" 
+                                   placeholder="Ad Soyad" 
+                                   required>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Test Kartları:</strong><br>
+                            • Son 4 hane <strong>0000</strong> → Kart reddedildi<br>
+                            • Son 4 hane <strong>1111</strong> → Yetersiz bakiye<br>
+                            • Diğer kartlar → Başarılı ödeme
+                        </div>
+                        <button type="submit" class="btn btn-modal">
+                            <i class="fas fa-lock me-2"></i>Ödemeyi Tamamla
+                        </button>
+                        <button type="button" class="btn btn-secondary ms-2" data-bs-dismiss="modal">İptal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tickets Modal -->
+    <div class="modal fade" id="ticketsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-ticket-alt me-2"></i>Biletlerim</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="tickets-message"></div>
+                    <div id="tickets-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users Management Modal -->
+    <div class="modal fade" id="usersManagementModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-users-cog me-2"></i>Admin Paneli</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Tab Navigation -->
+                    <ul class="nav nav-tabs mb-3" id="adminTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-panel" type="button" role="tab">
+                                <i class="fas fa-users me-2"></i>Kullanıcı Yönetimi
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="tickets-tab" data-bs-toggle="tab" data-bs-target="#tickets-panel" type="button" role="tab" onclick="loadEventsForTicketManagement()">
+                                <i class="fas fa-ticket-alt me-2"></i>Bilet Yönetimi
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="adminTabContent">
+                        <!-- Users Tab -->
+                        <div class="tab-pane fade show active" id="users-panel" role="tabpanel">
+                            <div id="users-management-message"></div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Kullanıcı Adı</th>
+                                            <th>E-posta</th>
+                                            <th>Rol</th>
+                                            <th>Oluşturulma</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="users-management-list">
+                                        <!-- Kullanıcılar buraya yüklenecek -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Tickets Tab -->
+                        <div class="tab-pane fade" id="tickets-panel" role="tabpanel">
+                            <div id="tickets-management-message"></div>
+                            
+                            <!-- Assign Ticket Section -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h6 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Kullanıcıya Bilet Ata</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Kullanıcı Seçin (User rolü)</label>
+                                            <select class="form-select" id="ticket-assign-user-id">
+                                                <option value="">Kullanıcı seçin...</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Etkinlik Seçin</label>
+                                            <select class="form-select" id="ticket-assign-event-id">
+                                                <option value="">Etkinlik seçin...</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">Adet</label>
+                                            <input type="number" class="form-control" id="ticket-assign-quantity" min="1" value="1">
+                                        </div>
+                                        <div class="col-md-2 mb-3 d-flex align-items-end">
+                                            <button class="btn btn-primary w-100" onclick="assignTicketToUser()">
+                                                <i class="fas fa-check me-1"></i>Ata
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- User Tickets List -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0"><i class="fas fa-list me-2"></i>Kullanıcı Biletleri</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Kullanıcı Seçin</label>
+                                        <select class="form-select" id="ticket-view-user-id" onchange="loadUserTicketsForAdmin()">
+                                            <option value="">Kullanıcı seçin...</option>
+                                        </select>
+                                    </div>
+                                    <div id="user-tickets-list-admin">
+                                        <p class="text-muted text-center">Biletleri görmek için bir kullanıcı seçin.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const API_URL = 'http://localhost:8000/api/v1';
+        let currentUser = null;
+        let currentUserId = null;
+        let currentUserRole = null;
+        let authToken = null;
+
+        // Modal functions
+        function openLoginModal() {
+            const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+            modal.show();
+        }
+
+        function openRegisterModal() {
+            const modal = new bootstrap.Modal(document.getElementById('registerModal'));
+            modal.show();
+        }
+
+        function showProfileModal() {
+            loadProfile();
+            const modal = new bootstrap.Modal(document.getElementById('profileModal'));
+            modal.show();
+        }
+
+        function showTicketsModal() {
+            loadMyTickets();
+            const modal = new bootstrap.Modal(document.getElementById('ticketsModal'));
+            modal.show();
+        }
+
+        function showUsersManagementModal() {
+            loadUsers();
+            const modal = new bootstrap.Modal(document.getElementById('usersManagementModal'));
+            modal.show();
+        }
+
+        function scrollToEvents() {
+            document.getElementById('events-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function decodeToken(token) {
+            if (!token) return null;
+            try {
+                const base64Url = token.split('.')[1];
+                if (!base64Url) return null;
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (error) {
+                console.error('Token parse error:', error);
+                return null;
+            }
+        }
+
+        function updateAuthUI() {
+            const userMenuItem = document.getElementById('user-menu-item');
+            const loginBtnItem = document.getElementById('login-btn-item');
+            const registerBtnItem = document.getElementById('register-btn-item');
+            const navbarUsername = document.getElementById('navbar-username');
+            const eventAdminControls = document.getElementById('event-admin-controls');
+            const adminPanelMenuItem = document.getElementById('admin-panel-menu-item');
+            const ticketsMenuItem = document.getElementById('tickets-menu-item');
+
+            if (authToken && currentUser) {
+                // User is logged in
+                userMenuItem.style.display = 'block';
+                loginBtnItem.style.display = 'none';
+                registerBtnItem.style.display = 'none';
+                navbarUsername.textContent = currentUser;
+
+                if (eventAdminControls) {
+                    if (currentUserRole === 'admin' || currentUserRole === 'organizer') {
+                        eventAdminControls.classList.remove('hidden');
+                    } else {
+                        eventAdminControls.classList.add('hidden');
+                    }
+                }
+
+                // Admin paneli menü öğesini göster/gizle
+                if (adminPanelMenuItem) {
+                    if (currentUserRole === 'admin') {
+                        adminPanelMenuItem.style.display = 'block';
+                    } else {
+                        adminPanelMenuItem.style.display = 'none';
+                    }
+                }
+                
+                // Biletlerim menü öğesini göster/gizle (sadece user rolü için)
+                if (ticketsMenuItem) {
+                    if (currentUserRole === 'admin' || currentUserRole === 'organizer') {
+                        ticketsMenuItem.style.display = 'none';
+                    } else {
+                        ticketsMenuItem.style.display = 'block';
+                    }
+                }
+            } else {
+                // User is not logged in
+                userMenuItem.style.display = 'none';
+                loginBtnItem.style.display = 'block';
+                registerBtnItem.style.display = 'block';
+
+                if (eventAdminControls) {
+                    eventAdminControls.classList.add('hidden');
+                }
+
+                if (adminPanelMenuItem) {
+                    adminPanelMenuItem.style.display = 'none';
+                }
+                
+                if (ticketsMenuItem) {
+                    ticketsMenuItem.style.display = 'none';
+                }
+            }
+        }
+
+        function logout() {
+            authToken = null;
+            currentUser = null;
+            currentUserId = null;
+            currentUserRole = null;
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('currentUserId');
+            localStorage.removeItem('currentUserRole');
+            
+            updateAuthUI();
+            loadEvents();
+            
+            // Close all modals
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                const bsModal = bootstrap.Modal.getInstance(modal);
+                if (bsModal) bsModal.hide();
+            });
+        }
+
+        function showMessage(elementId, message, type = 'success') {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            element.innerHTML = `<div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>`;
+            
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 5000);
+        }
+
+        async function register(e) {
+            e.preventDefault();
+            const data = {
+                email: document.getElementById('register-email').value,
+                username: document.getElementById('register-username').value,
+                full_name: document.getElementById('register-fullname').value,
+                password: document.getElementById('register-password').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    showMessage('register-message', 'Kayıt başarılı! Giriş yapabilirsiniz.', 'success');
+                    // Form reset
+                    const registerForm = document.querySelector('#registerModal form');
+                    if (registerForm) registerForm.reset();
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                        if (modal) modal.hide();
+                        openLoginModal();
+                    }, 1500);
+                } else {
+                    showMessage('register-message', result.detail || 'Kayıt başarısız!', 'error');
+                }
+            } catch (error) {
+                showMessage('register-message', 'Bir hata oluştu: ' + error.message, 'error');
+            }
+        }
+
+        async function login(e) {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('username', document.getElementById('login-username').value);
+            formData.append('password', document.getElementById('login-password').value);
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    authToken = result.access_token;
+                    currentUser = document.getElementById('login-username').value;
+                    const payload = decodeToken(authToken);
+                    currentUserId = payload?.user_id || null;
+                    currentUserRole = result.role || payload?.role || null;
+                    
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('currentUser', currentUser);
+                    if (currentUserId) {
+                        localStorage.setItem('currentUserId', currentUserId);
+                    }
+                    if (currentUserRole) {
+                        localStorage.setItem('currentUserRole', currentUserRole);
+                    } else {
+                        localStorage.removeItem('currentUserRole');
+                    }
+                    
+                    showMessage('login-message', 'Giriş başarılı!', 'success');
+                    // Form reset
+                    const loginForm = document.querySelector('#loginModal form');
+                    if (loginForm) loginForm.reset();
+                    
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                        if (modal) modal.hide();
+                        updateAuthUI();
+                        loadEvents();
+                        loadProfile();
+                    }, 1000);
+                } else {
+                    showMessage('login-message', result.detail || 'Giriş başarısız!', 'error');
+                }
+            } catch (error) {
+                showMessage('login-message', 'Bir hata oluştu: ' + error.message, 'error');
+            }
+        }
+
+        async function loadEvents() {
+            try {
+                const response = await fetch(`${API_URL}/events/?limit=50`);
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Etkinlikler getirilemedi');
+                }
+
+                const events = await response.json();
+                const eventsList = document.getElementById('events-list');
+                const eventsMessage = document.getElementById('events-message');
+                const isAdmin = authToken && currentUserRole === 'admin';
+                const isOrganizer = authToken && currentUserRole === 'organizer';
+                const canManageEvents = isAdmin || isOrganizer;
+
+                eventsList.innerHTML = '';
+                if (eventsMessage) {
+                    eventsMessage.innerHTML = '';
+                }
+
+                if (!Array.isArray(events) || events.length === 0) {
+                    eventsList.innerHTML = `
+                        <div class="col-12">
+                            <div class="empty-state">
+                                <i class="fas fa-calendar-times"></i>
+                                <h4>Şu anda listelenecek etkinlik bulunmuyor.</h4>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                events.forEach(event => {
+                    const startDate = new Date(event.start_date).toLocaleDateString('tr-TR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    const imageUrl = event.image_url || 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                    
+                    let purchaseButton = '';
+                    if (!authToken) {
+                        purchaseButton = '<button class="btn btn-buy-ticket" disabled>Giriş Yaparak Bilet Al</button>';
+                    } else if (currentUserRole === 'admin' || currentUserRole === 'organizer') {
+                        purchaseButton = '<button class="btn btn-buy-ticket" disabled>Admin/Organizer bilet alamaz</button>';
+                    } else if (event.available_tickets > 0) {
+                        purchaseButton = `
+                            <div class="input-group mb-2">
+                                <input type="number" class="form-control" id="quantity-${event.id}" min="1" max="${event.available_tickets}" value="1" style="max-width: 100px;">
+                                <button class="btn btn-buy-ticket" onclick="buyTicket(${event.id})">
+                                    <i class="fas fa-shopping-cart me-2"></i>Bilet Al
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        purchaseButton = '<button class="btn btn-buy-ticket" disabled>Biletler Tükendi</button>';
+                    }
+
+                    const adminActions = canManageEvents ? `
+                        <button class="btn btn-danger btn-sm mt-2" onclick="deleteEvent(${event.id})">
+                            <i class="fas fa-trash me-2"></i>Sil
+                        </button>
+                    ` : '';
+
+                    const card = `
+                        <div class="col-md-4">
+                            <div class="event-card">
+                                <img src="${imageUrl}" class="event-card-img" alt="${event.title}" onerror="this.src='https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                                <div class="event-card-body">
+                                    <h5 class="event-card-title">${event.title}</h5>
+                                    <div class="event-card-info">
+                                        <i class="fas fa-map-marker-alt"></i>${event.venue}, ${event.city}
+                                    </div>
+                                    <div class="event-card-info">
+                                        <i class="fas fa-calendar-alt"></i>${startDate}
+                                    </div>
+                                    <div class="event-card-info">
+                                        <i class="fas fa-ticket-alt"></i>Kalan Bilet: ${event.available_tickets} / ${event.total_capacity}
+                                    </div>
+                                    <div class="event-card-price">${event.base_price} TRY</div>
+                                    ${purchaseButton}
+                                    ${adminActions}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    eventsList.innerHTML += card;
+                });
+            } catch (error) {
+                showMessage('events-message', 'Etkinlikler yüklenirken hata: ' + error.message, 'error');
+            }
+        }
+
+        async function createEvent(e) {
+            e.preventDefault();
+            
+            const storedToken = localStorage.getItem('authToken');
+            if (!storedToken) {
+                showMessage('event-admin-message', 'Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+            
+            authToken = storedToken;
+            const storedRole = localStorage.getItem('currentUserRole');
+            if (storedRole !== 'admin' && storedRole !== 'organizer') {
+                showMessage('event-admin-message', 'Etkinlik oluşturmak için yönetici veya organizatör olarak giriş yapmalısınız!', 'error');
+                return;
+            }
+            
+            currentUserRole = storedRole;
+            const storedUserId = localStorage.getItem('currentUserId');
+            if (storedUserId) {
+                currentUserId = parseInt(storedUserId, 10);
+            }
+            
+            if (!currentUserId) {
+                showMessage('event-admin-message', 'Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+
+            const title = document.getElementById('event-title').value.trim();
+            const category = document.getElementById('event-category').value;
+            const venue = document.getElementById('event-venue').value.trim();
+            const city = document.getElementById('event-city').value.trim();
+            const address = document.getElementById('event-address').value.trim();
+            const description = document.getElementById('event-description').value.trim();
+            const imageUrl = document.getElementById('event-image-url').value.trim();
+            const startDateValue = document.getElementById('event-start-date').value;
+            const endDateValue = document.getElementById('event-end-date').value;
+            const basePrice = parseFloat(document.getElementById('event-base-price').value);
+            const capacity = parseInt(document.getElementById('event-capacity').value, 10);
+
+            if (!startDateValue || !endDateValue) {
+                showMessage('event-admin-message', 'Lütfen etkinlik başlangıç ve bitiş tarihlerini girin.', 'error');
+                return;
+            }
+
+            const startDate = new Date(startDateValue);
+            const endDate = new Date(endDateValue);
+
+            if (startDate >= endDate) {
+                showMessage('event-admin-message', 'Bitiş tarihi başlangıç tarihinden sonra olmalıdır.', 'error');
+                return;
+            }
+
+            if (Number.isNaN(basePrice) || Number.isNaN(capacity) || basePrice < 0 || capacity < 1) {
+                showMessage('event-admin-message', 'Lütfen geçerli fiyat ve kapasite değerleri girin.', 'error');
+                return;
+            }
+
+            const payload = {
+                title,
+                category,
+                venue,
+                city,
+                address: address || null,
+                start_date: startDate.toISOString(),
+                end_date: endDate.toISOString(),
+                base_price: basePrice,
+                total_capacity: capacity,
+                organizer_id: currentUserId,
+                description: description || null,
+                image_url: imageUrl || null
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/events/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${storedToken}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.detail || `Etkinlik oluşturulamadı (${response.status})`);
+                }
+
+                document.getElementById('create-event-form').reset();
+                await loadEvents();
+                showMessage('event-admin-message', 'Etkinlik başarıyla oluşturuldu.', 'success');
+            } catch (error) {
+                showMessage('event-admin-message', 'Etkinlik oluşturulurken hata: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteEvent(eventId) {
+            if (!authToken || (currentUserRole !== 'admin' && currentUserRole !== 'organizer')) {
+                showMessage('events-message', 'Etkinlik silmek için yönetici veya organizatör olarak giriş yapmalısınız!', 'error');
+                return;
+            }
+
+            if (!confirm('Bu etkinliği silmek istediğinizden emin misiniz?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/events/${eventId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (!response.ok && response.status !== 204) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Etkinlik silinemedi');
+                }
+
+                await loadEvents();
+                showMessage('events-message', 'Etkinlik başarıyla silindi.', 'success');
+            } catch (error) {
+                showMessage('events-message', 'Etkinlik silinirken hata: ' + error.message, 'error');
+            }
+        }
+
+        // Bilet satın alma için global değişkenler
+        let pendingTicketPurchase = null;
+
+        function openPaymentModal(eventId, quantity) {
+            pendingTicketPurchase = { eventId, quantity };
+            const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            modal.show();
+            // Form'u temizle
+            document.getElementById('payment-form').reset();
+            document.getElementById('payment-message').innerHTML = '';
+        }
+
+        async function processPayment() {
+            if (!pendingTicketPurchase) {
+                showMessage('payment-message', 'Bilet bilgisi bulunamadı. Lütfen tekrar deneyin.', 'error');
+                return;
+            }
+
+            // Token'ı localStorage'dan tekrar yükle
+            const storedToken = localStorage.getItem('authToken');
+            if (!storedToken) {
+                showMessage('payment-message', 'Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+            
+            // Global token değişkenini güncelle
+            authToken = storedToken;
+
+            // currentUserId'yi localStorage'dan yükle
+            const storedUserId = localStorage.getItem('currentUserId');
+            if (!storedUserId) {
+                showMessage('payment-message', 'Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+            
+            // Global userId değişkenini güncelle
+            currentUserId = parseInt(storedUserId, 10);
+
+            // Kart bilgilerini al
+            const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
+            const cardExpiry = document.getElementById('card-expiry').value;
+            const cardCvv = document.getElementById('card-cvv').value;
+            const cardHolderName = document.getElementById('card-holder-name').value;
+
+            // Validasyon
+            if (!cardNumber || cardNumber.length < 13) {
+                showMessage('payment-message', 'Lütfen geçerli bir kart numarası girin.', 'error');
+                return;
+            }
+
+            if (!cardExpiry || !cardExpiry.match(/^\d{2}\/\d{2}$/)) {
+                showMessage('payment-message', 'Lütfen geçerli bir son kullanma tarihi girin (MM/YY).', 'error');
+                return;
+            }
+
+            if (!cardCvv || cardCvv.length < 3) {
+                showMessage('payment-message', 'Lütfen geçerli bir CVV girin.', 'error');
+                return;
+            }
+
+            if (!cardHolderName) {
+                showMessage('payment-message', 'Lütfen kart sahibi adını girin.', 'error');
+                return;
+            }
+
+            const { eventId, quantity } = pendingTicketPurchase;
+            showMessage('payment-message', 'İşleminiz gerçekleştiriliyor...', 'info');
+
+            // Debug: Token kontrolü
+            console.log('Payment process - Token check:', {
+                hasToken: !!storedToken,
+                tokenLength: storedToken ? storedToken.length : 0,
+                tokenPreview: storedToken ? storedToken.substring(0, 20) + '...' : 'NO TOKEN',
+                currentUserId: currentUserId
+            });
+
+            try {
+                // Önce bilet rezervasyonu yap
+                const ticketResponse = await fetch(`${API_URL}/tickets/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${storedToken}`
+                    },
+                    body: JSON.stringify({
+                        event_id: eventId,
+                        user_id: currentUserId,
+                        quantity: quantity
+                    })
+                });
+
+                const ticket = await ticketResponse.json();
+                
+                if (!ticketResponse.ok) {
+                    showMessage('payment-message', 'Bilet rezervasyonu başarısız: ' + (ticket.detail || 'Bilinmeyen hata'), 'error');
+                    return;
+                }
+
+                // Ödeme işlemi
+                const paymentResponse = await fetch(`${API_URL}/payments/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${storedToken}`
+                    },
+                    body: JSON.stringify({
+                        ticket_id: ticket.id,
+                        user_id: currentUserId,
+                        payment_method: 'credit_card',
+                        card_number: cardNumber,
+                        card_holder_name: cardHolderName,
+                        expiry_date: cardExpiry,
+                        cvv: cardCvv
+                    })
+                });
+
+                const payment = await paymentResponse.json();
+                
+                if (paymentResponse.ok && payment.status === 'completed') {
+                    showMessage('payment-message', 
+                        `Ödeme başarılı! Bilet No: ${ticket.ticket_number}`, 
+                        'success');
+                    
+                    // Modal'ı kapat
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+                        if (modal) modal.hide();
+                        pendingTicketPurchase = null;
+                        loadEvents();
+                        loadMyTickets();
+                    }, 1500);
+                } else {
+                    showMessage('payment-message', 
+                        'Ödeme başarısız: ' + (payment.failure_reason || payment.detail || 'Bilinmeyen hata'), 
+                        'error');
+                }
+            } catch (error) {
+                showMessage('payment-message', 'Hata: ' + error.message, 'error');
+            }
+        }
+
+        async function buyTicket(eventId) {
+            if (!authToken) {
+                showMessage('events-message', 'Bilet almak için giriş yapmalısınız!', 'error');
+                openLoginModal();
+                return;
+            }
+
+            if (!currentUserId) {
+                showMessage('events-message', 'Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+
+            const quantityInput = document.getElementById(`quantity-${eventId}`);
+            if (!quantityInput) {
+                showMessage('events-message', 'Bilet seçimi bulunamadı. Lütfen sayfayı yenileyin.', 'error');
+                return;
+            }
+
+            const quantity = parseInt(quantityInput.value, 10);
+            if (!quantity || quantity < 1) {
+                showMessage('events-message', 'Lütfen geçerli bir bilet adedi girin.', 'error');
+                return;
+            }
+
+            // Ödeme modal'ını aç
+            openPaymentModal(eventId, quantity);
+        }
+
+        async function loadMyTickets() {
+            if (!authToken) {
+                showMessage('tickets-message', 'Biletlerinizi görmek için giriş yapmalısınız!', 'error');
+                return;
+            }
+
+            if (!currentUserId) {
+                showMessage('tickets-message', 'Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/tickets/user/${currentUserId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Biletler getirilemedi');
+                }
+                
+                const tickets = await response.json();
+                const ticketsList = document.getElementById('tickets-list');
+                const ticketsMessage = document.getElementById('tickets-message');
+                
+                ticketsList.innerHTML = '';
+                if (ticketsMessage) {
+                    ticketsMessage.innerHTML = '';
+                }
+
+                if (tickets.length === 0) {
+                    ticketsList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-ticket-alt"></i>
+                            <h4>Henüz biletiniz yok.</h4>
+                        </div>
+                    `;
+                    return;
+                }
+
+                tickets.forEach(ticket => {
+                    const ticketCard = `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-ticket-alt me-2"></i>Bilet #${ticket.ticket_number}</h5>
+                                <p class="card-text"><strong>Durum:</strong> ${ticket.status}</p>
+                                <p class="card-text"><strong>Adet:</strong> ${ticket.quantity}</p>
+                                <p class="card-text"><strong>Toplam Fiyat:</strong> ${ticket.total_price} TRY</p>
+                                <p class="card-text"><strong>Rezervasyon Tarihi:</strong> ${new Date(ticket.reserved_at).toLocaleString('tr-TR')}</p>
+                            </div>
+                        </div>
+                    `;
+                    ticketsList.innerHTML += ticketCard;
+                });
+            } catch (error) {
+                showMessage('tickets-message', 'Biletler yüklenirken hata: ' + error.message, 'error');
+            }
+        }
+
+        async function loadUsers() {
+            if (!authToken) {
+                showMessage('users-management-message', 'Kullanıcıları görmek için giriş yapmalısınız!', 'error');
+                return;
+            }
+
+            if (currentUserRole !== 'admin') {
+                showMessage('users-management-message', 'Bu işlem için admin yetkisi gerekir!', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/users/`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Kullanıcılar getirilemedi');
+                }
+
+                const users = await response.json();
+                const usersList = document.getElementById('users-management-list');
+                const usersMessage = document.getElementById('users-management-message');
+                
+                usersList.innerHTML = '';
+                if (usersMessage) {
+                    usersMessage.innerHTML = '';
+                }
+
+                if (users.length === 0) {
+                    usersList.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center">Henüz kullanıcı bulunmuyor.</td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                users.forEach(user => {
+                    const roleOptions = `
+                        <option value="user" ${user.role === 'user' ? 'selected' : ''}>User</option>
+                        <option value="organizer" ${user.role === 'organizer' ? 'selected' : ''}>Organizer</option>
+                        <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+                    `;
+                    
+                    const createdDate = new Date(user.created_at).toLocaleString('tr-TR');
+                    
+                    const row = `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>
+                                <select class="form-select form-select-sm" id="role-select-${user.id}">
+                                    ${roleOptions}
+                                </select>
+                            </td>
+                            <td>${createdDate}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="updateUserRole(${user.id})">
+                                    <i class="fas fa-save me-1"></i>Kaydet
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    usersList.innerHTML += row;
+                });
+                
+                // Bilet yönetimi için user rolündeki kullanıcıları dropdown'a ekle
+                populateUserDropdowns(users);
+            } catch (error) {
+                showMessage('users-management-message', 'Kullanıcılar yüklenirken hata: ' + error.message, 'error');
+            }
+        }
+        
+        function populateUserDropdowns(users) {
+            const userDropdowns = [
+                document.getElementById('ticket-assign-user-id'),
+                document.getElementById('ticket-view-user-id')
+            ];
+            
+            userDropdowns.forEach(dropdown => {
+                if (dropdown) {
+                    // Mevcut seçimi sakla
+                    const currentValue = dropdown.value;
+                    dropdown.innerHTML = '<option value="">Kullanıcı seçin...</option>';
+                    
+                    // Sadece user rolündeki kullanıcıları ekle
+                    users.filter(user => user.role === 'user').forEach(user => {
+                        const option = document.createElement('option');
+                        option.value = user.id;
+                        option.textContent = `${user.username} (${user.email})`;
+                        dropdown.appendChild(option);
+                    });
+                    
+                    // Eğer mevcut değer varsa geri yükle
+                    if (currentValue) {
+                        dropdown.value = currentValue;
+                    }
+                }
+            });
+        }
+        
+        async function loadEventsForTicketManagement() {
+            if (!authToken || currentUserRole !== 'admin') {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/events/`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Etkinlikler yüklenemedi');
+                }
+                
+                const events = await response.json();
+                const eventDropdown = document.getElementById('ticket-assign-event-id');
+                if (eventDropdown) {
+                    const currentValue = eventDropdown.value;
+                    eventDropdown.innerHTML = '<option value="">Etkinlik seçin...</option>';
+                    
+                    events.forEach(event => {
+                        const option = document.createElement('option');
+                        option.value = event.id;
+                        option.textContent = `${event.title} (${event.available_tickets} bilet kaldı) - ${event.base_price} TRY`;
+                        eventDropdown.appendChild(option);
+                    });
+                    
+                    if (currentValue) {
+                        eventDropdown.value = currentValue;
+                    }
+                }
+            } catch (error) {
+                showMessage('tickets-management-message', 'Etkinlikler yüklenirken hata: ' + error.message, 'error');
+            }
+        }
+        
+        async function assignTicketToUser() {
+            if (!authToken || currentUserRole !== 'admin') {
+                showMessage('tickets-management-message', 'Bu işlem için admin yetkisi gerekir!', 'error');
+                return;
+            }
+            
+            const userId = document.getElementById('ticket-assign-user-id').value;
+            const eventId = document.getElementById('ticket-assign-event-id').value;
+            const quantity = parseInt(document.getElementById('ticket-assign-quantity').value, 10);
+            
+            if (!userId || !eventId || !quantity || quantity < 1) {
+                showMessage('tickets-management-message', 'Lütfen tüm alanları doldurun ve geçerli bir adet girin.', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/tickets/admin/assign`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        user_id: parseInt(userId, 10),
+                        event_id: parseInt(eventId, 10),
+                        quantity: quantity
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.detail || 'Bilet atanamadı');
+                }
+                
+                showMessage('tickets-management-message', 
+                    `Bilet başarıyla atandı! Bilet No: ${result.ticket_number}`, 
+                    'success');
+                
+                // Formu temizle
+                document.getElementById('ticket-assign-event-id').value = '';
+                document.getElementById('ticket-assign-quantity').value = '1';
+                
+                // Etkinlik listesini yenile
+                loadEventsForTicketManagement();
+                
+                // Eğer seçili kullanıcının biletleri görüntüleniyorsa, yenile
+                if (document.getElementById('ticket-view-user-id').value === userId) {
+                    loadUserTicketsForAdmin();
+                }
+            } catch (error) {
+                showMessage('tickets-management-message', 'Bilet atanırken hata: ' + error.message, 'error');
+            }
+        }
+        
+        async function loadUserTicketsForAdmin() {
+            if (!authToken || currentUserRole !== 'admin') {
+                return;
+            }
+            
+            const userId = document.getElementById('ticket-view-user-id').value;
+            if (!userId) {
+                document.getElementById('user-tickets-list-admin').innerHTML = 
+                    '<p class="text-muted text-center">Biletleri görmek için bir kullanıcı seçin.</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/tickets/user/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Biletler yüklenemedi');
+                }
+                
+                const tickets = await response.json();
+                const ticketsList = document.getElementById('user-tickets-list-admin');
+                
+                if (tickets.length === 0) {
+                    ticketsList.innerHTML = `
+                        <div class="text-center py-4">
+                            <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">Bu kullanıcının henüz bileti yok.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                ticketsList.innerHTML = '';
+                tickets.forEach(ticket => {
+                    const ticketCard = `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="card-title"><i class="fas fa-ticket-alt me-2"></i>Bilet #${ticket.ticket_number}</h6>
+                                        <p class="card-text mb-1"><strong>Etkinlik ID:</strong> ${ticket.event_id}</p>
+                                        <p class="card-text mb-1"><strong>Adet:</strong> ${ticket.quantity}</p>
+                                        <p class="card-text mb-1"><strong>Toplam Fiyat:</strong> ${ticket.total_price} TRY</p>
+                                        <p class="card-text mb-1"><strong>Durum:</strong> ${ticket.status}</p>
+                                        <p class="card-text mb-0"><small class="text-muted">
+                                            Rezervasyon: ${new Date(ticket.reserved_at).toLocaleString('tr-TR')}
+                                        </small></p>
+                                    </div>
+                                    <button class="btn btn-sm btn-danger" onclick="adminDeleteTicket(${ticket.id})">
+                                        <i class="fas fa-trash me-1"></i>Sil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    ticketsList.innerHTML += ticketCard;
+                });
+            } catch (error) {
+                showMessage('tickets-management-message', 'Biletler yüklenirken hata: ' + error.message, 'error');
+            }
+        }
+        
+        async function adminDeleteTicket(ticketId) {
+            if (!authToken || currentUserRole !== 'admin') {
+                showMessage('tickets-management-message', 'Bu işlem için admin yetkisi gerekir!', 'error');
+                return;
+            }
+            
+            if (!confirm('Bu bileti silmek istediğinizden emin misiniz?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/tickets/admin/${ticketId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (!response.ok && response.status !== 204) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Bilet silinemedi');
+                }
+                
+                showMessage('tickets-management-message', 'Bilet başarıyla silindi.', 'success');
+                
+                // Listeyi yenile
+                loadUserTicketsForAdmin();
+                loadEventsForTicketManagement();
+            } catch (error) {
+                showMessage('tickets-management-message', 'Bilet silinirken hata: ' + error.message, 'error');
+            }
+        }
+
+        async function updateUserRole(userId) {
+            if (!authToken || currentUserRole !== 'admin') {
+                showMessage('users-management-message', 'Bu işlem için admin yetkisi gerekir!', 'error');
+                return;
+            }
+
+            const roleSelect = document.getElementById(`role-select-${userId}`);
+            if (!roleSelect) {
+                return;
+            }
+
+            const newRole = roleSelect.value;
+            
+            try {
+                const response = await fetch(`${API_URL}/users/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        role: newRole
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Kullanıcı güncellenemedi');
+                }
+
+                const updatedUser = await response.json();
+                showMessage('users-management-message', 
+                    `Kullanıcı ${updatedUser.username} rolü ${newRole} olarak güncellendi.`, 
+                    'success');
+                
+                // Liste yenile
+                setTimeout(() => {
+                    loadUsers();
+                }, 1000);
+            } catch (error) {
+                showMessage('users-management-message', 'Kullanıcı güncellenirken hata: ' + error.message, 'error');
+                // Hata durumunda liste yenile
+                loadUsers();
+            }
+        }
+
+        async function loadProfile() {
+            if (!authToken) {
+                showMessage('profile-message', 'Profil bilgilerini görmek için giriş yapmalısınız!', 'error');
+                return;
+            }
+
+            if (!currentUserId) {
+                showMessage('profile-message', 'Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/users/${currentUserId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Profil bilgileri alınamadı');
+                }
+
+                const user = await response.json();
+                currentUserRole = user.role || currentUserRole;
+                if (currentUserRole) {
+                    localStorage.setItem('currentUserRole', currentUserRole);
+                }
+                updateAuthUI();
+                
+                const details = document.getElementById('profile-details');
+                const profileMessage = document.getElementById('profile-message');
+                if (profileMessage) {
+                    profileMessage.innerHTML = '';
+                }
+                
+                const roleValue = user.role || currentUserRole;
+                const readableRole = roleValue ? roleValue.charAt(0).toUpperCase() + roleValue.slice(1) : '-';
+                
+                details.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4"><i class="fas fa-user-circle me-2"></i>Kullanıcı Bilgileri</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <strong>Kullanıcı Adı:</strong><br>
+                                    ${user.username}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>E-posta:</strong><br>
+                                    ${user.email}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Ad Soyad:</strong><br>
+                                    ${user.full_name || '-'}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Telefon:</strong><br>
+                                    ${user.phone || '-'}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Rol:</strong><br>
+                                    ${readableRole}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <strong>Oluşturulma:</strong><br>
+                                    ${new Date(user.created_at).toLocaleString('tr-TR')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                showMessage('profile-message', 'Profil yüklenirken hata: ' + error.message, 'error');
+            }
+        }
+
+        // Page load
+        // Kart bilgisi input formatlaması ve ödeme formu
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardNumberInput = document.getElementById('card-number');
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\s/g, '');
+                    let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                    e.target.value = formattedValue;
+                });
+            }
+
+            const cardExpiryInput = document.getElementById('card-expiry');
+            if (cardExpiryInput) {
+                cardExpiryInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length >= 2) {
+                        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    }
+                    e.target.value = value;
+                });
+            }
+
+            const cardCvvInput = document.getElementById('card-cvv');
+            if (cardCvvInput) {
+                cardCvvInput.addEventListener('input', function(e) {
+                    e.target.value = e.target.value.replace(/\D/g, '');
+                });
+            }
+
+            const paymentForm = document.getElementById('payment-form');
+            if (paymentForm) {
+                paymentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    processPayment();
+                });
+            }
+        });
+
+        window.onload = function() {
+            authToken = localStorage.getItem('authToken');
+            currentUser = localStorage.getItem('currentUser');
+            currentUserId = localStorage.getItem('currentUserId');
+            currentUserRole = localStorage.getItem('currentUserRole');
+
+            if (currentUserRole === 'null') {
+                currentUserRole = null;
+            }
+
+            if (authToken && !currentUserId) {
+                const payload = decodeToken(authToken);
+                currentUserId = payload?.user_id || null;
+                if (currentUserId) {
+                    localStorage.setItem('currentUserId', currentUserId);
+                }
+                if (!currentUserRole && payload?.role) {
+                    currentUserRole = payload.role;
+                    localStorage.setItem('currentUserRole', currentUserRole);
+                }
+            }
+
+            updateAuthUI();
+            loadEvents();
+            if (authToken) {
+                loadProfile();
+            }
+            
+            // Form event listener
+            const createEventForm = document.getElementById('create-event-form');
+            if (createEventForm) {
+                createEventForm.addEventListener('submit', createEvent);
+            }
+        };
+    </script>
+</body>
+</html>
